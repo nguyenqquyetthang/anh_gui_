@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="passwordForm">
+  <input id="currentPassword" type="password" />
+  <input id="newPassword" type="password" />
+  <input id="confirmPassword" type="password" />
+  <button type="submit">Đổi mật khẩu</button>
+</form>
+
+<script>
+  document.getElementById('passwordForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const oldPass = document.getElementById('currentPassword').value;
+    const newPass1 = document.getElementById('newPassword').value;
+    const newPass2 = document.getElementById('confirmPassword').value;
+
+    console.log('Old:', oldPass);
+    console.log('New1:', newPass1);
+    console.log('New2:', newPass2);
+  });
+</script>
+
+</body>
+</html>

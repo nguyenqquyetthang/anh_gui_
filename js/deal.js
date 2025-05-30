@@ -366,8 +366,8 @@ function showWarningToast(message) {
 
 
 // Khởi tạo
-updateSliderArrows();
-dealSlider.addEventListener('scroll', updateSliderArrows);
+// updateSliderArrows();
+// dealSlider.addEventListener('scroll', updateSliderArrows);
 
 
 
