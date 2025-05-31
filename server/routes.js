@@ -15,8 +15,9 @@ router.post('/api/login', async (req, res) => {
 
     if (result.recordset.length > 0) {
       const fullName = result.recordset[0].fullName;
+      const role = result.recordset[0].role;
       // res.json({ success: true, clientId: result.recordset[0].ID, });
-      res.json({ success: true, fullName, username, password});
+      res.json({ success: true, fullName, username , role});
     } else {
       res.json({ success: false, message: 'Sai tên đăng nhập hoặc mật khẩu.' });
     }
@@ -129,7 +130,6 @@ router.post('/api/profile', async (req, res) => {
 
     try {
       const request = pool.request();
-        await pool.request()
         request.input('tel', sql.VarChar, tel);
         request.input('ngaySinh', sql.Date, ngaySinh);
         request.input('sex', sql.VarChar, sex);
@@ -147,6 +147,25 @@ router.post('/api/profile', async (req, res) => {
         res.status(500).json({ message: "Lỗi khi cập nhật thông tin" });
     }
 });
+// trả thông tin đã cập nhật lên hiện thị cho người nhìn
+router.post('/api/profileDisplay', async (req, res) => {
+    const { username } = req.body; 
+    try {
+        const result = await pool.request()
+            .input('username', sql.VarChar, username)
+            .query('SELECT tel, ngaySinh, sex FROM client WHERE username = @username');
+
+        if (result.recordset.length > 0) {
+            res.json(result.recordset[0]);
+        } else {
+            res.status(404).json({ message: 'Không tìm thấy người dùng.' });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Lỗi server.' });
+    }
+});
+
 // lưu thông tin để làm phần lịch sử thanh toán 
   router.post('/api/checkout', async (req, res) => {
     const { username, orderId, orderDate, total, cartItems, shippingMethod, paymentMethod } = req.body;

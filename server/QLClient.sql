@@ -24,7 +24,7 @@ GO
 ALTER TABLE Client
 ADD 
     role TINYINT CHECK (role BETWEEN 0 AND 9),
-    tel CHAR(9) CHECK (tel NOT LIKE '%[^0-9]%'),
+    tel CHAR(10) CHECK (tel NOT LIKE '%[^0-9]%'),
     ngaySinh DATE,
     sex VARCHAR(10);
 -- theem bang

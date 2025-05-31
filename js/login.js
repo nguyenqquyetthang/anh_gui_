@@ -15,9 +15,15 @@ async function login() {
     // localStorage.setItem("clientId", data.clientId);
     localStorage.setItem('fullName', data.fullName);
     localStorage.setItem('username', data.username);
-    localStorage.setItem('password', data.password);
+    localStorage.setItem('role', data.role);
      // thay managerId thành clientId
-    window.location.href = "../html/main.html";
+    if (data.role === 1) {
+      window.location.href = "../html/main.html"; // Người dùng thông thường
+    } else if (data.role === 2) {
+      window.location.href = "../html/demoadmin.html"; // Quản trị viên
+    } else {
+      alert("Vai trò không xác định!");
+    }
   } else {
     alert("Đăng nhập thất bại: " + data.message);
   }
